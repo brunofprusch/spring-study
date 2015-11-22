@@ -1,0 +1,91 @@
+--Spring
+
+Anotações de estudo do livro Vire o Jogo com Spring Framework.
+
+
+--Encontrando os Beans
+
+	É possível informar para o spring duas maneiras para que os beans sejam encontrados.
+
+		Primeira: 
+			
+			No XML de configuração informar cada bean individualmente, bem como suas dependencias que são injetadas.
+
+			<bean class="br.com.casadocodigo.DAOProduto"/>
+
+			<bean id="daoUsuario" class="br.com.casadocodigo.DAOUsuario">
+				<property name="dataSource" ref="dataSourceUsuarios"/>
+			</bean>
+
+
+		Segunda:
+
+			Utiliando a tag <context:component-scan/>, está tag tem por finalidade escanear todo um pacote, e realizar a injeção dos beans bem como suas dependências que estão anotados a baixo do nível informado.
+			É obrigatório o uso do parâmetro 'base-package', onde deve receber como valor o nome do pacote onde contêm todas as nossas classes que implementam os beans do nosso sistema.
+
+				 <context:component-scan base-package="br.com.casadocodigo"/>
+
+			Sendo assim entra em cena o conceito de estereótipo. Uma classe é reconhecida pelo Spring como uma configuração de bean se possui uma anotação que defina o tipo de bean (estereótipo) que esta representa.
+			O tipo mais básico de componente é identificado pelo Spring pela anotação @Component.
+
+			Também são possíveis configurar outros tipos de componenetes, como por exemplo: 
+
+				@Repository - Para identificar DAO's
+				@Controller - Controler para controladores do Spring MVC.
+				@Service - Service para controle transacional mais fino.
+
+			Também é possível utilizar a anotação @Named definida na JSR-330, possui exatamente o mesmo comportamento da anotação @Component.
+
+
+--Callbacks 
+	
+		É possível definir método de callbacks para serem após a injeção e antes da destrição do bean.
+
+		@PostConstruct
+		@PreDestroy
+
+
+--Limitando o número de candidatos
+
+		Assim como no XML, ao utilizar anotações que são uma evulução, também podemos resolver o problema da ambiguidade de configuração.
+		Ou seja, podemos indificar ao injetar um bean, qual dependência o Spring realmente deve utilizar.
+
+		@Qualifier("dataSourceUsuario")
+
+		Lembrando que isto serve porque podemos ter duas classes que implementam a mesma interface, dado que no momento de injetarmos utilizamos a interface, o Spring não sabe qual implementação utilizar para aquela interface, sendo assim precisamos indicar para ele qual deve ser utilizada.
+
+
+
+
+--Utlizando configuração baseada em código
+
+		Assim como podemos realizar a configuração por XML e anotações, também podemos realizar diretamente por código Java, ou seja, a configuração será realizada utilizando um ou mais classes Java.
+
+		Para que isso seja possível, a classe ou as classes que possuirão todas as configurações devem ser anotadas com a anotação @Configuration,
+		está anotação nada mais é do que um estereótipo assim como a anotação @Component.
+
+		Os beans deverão ser registrados utilizando métodos, e a anotação @Bean, como no exemplo.
+
+			@Bean
+			public DAOUsuario daoUsuario() {
+				return new DAOUsuario();
+			}
+
+		Se utilizarmos somente a anotação @Bean, o nome do bean corresponderá ao nome do método.
+
+		Devemos continuar utilizando no XML a tag <context:component-scan base-package="br.com.casadocodigo.java"/>, e no parâmetro base-package, o caminho onde está a classe de configuração, pois assim como a anotação @Component, a anotação @Configuration também é um estereótipo.
+
+
+
+--Excluindo a configuração XML
+
+
+
+
+
+
+
+
+
+
+
