@@ -78,7 +78,38 @@ Anotações de estudo do livro Vire o Jogo com Spring Framework.
 
 
 --Excluindo a configuração XML
+		
+		É possível realizar toda a configuração e declaração dos bean diretamente em java.
+		Esta forma possui vantagens e desvantagens, a ventagem é que é possível colocar controladores de quando determinados beans devem ser injetados por exemplo, já a desvantagem é que a cada mudança existirá a necessidade de recompilação de código.
+		Já a forma de utilizar as configurações com xml, é justamente o contrário, desta meneira não é possível incluir controladores, por outro lado, a cada modificação nãop existe a necessidade de recompilação de código.
 
+
+-- Acesso a Dados com Spring
+
+
+		O Spring disponibiliza realizar o acesso a dados de diversas maneiras, como por exemplo utilizando JNDI, porém a forma como estou estudando é utilizando drive de conexão, ou seja, utilizando JPA.
+
+		Desta meneira, é importante que utilizamos um pool de conexão, para isto fazemos uso do C3PO, porém existem outras opção, como por exemplo o DBCP que é usado pelo tomcat.
+
+		Explicando as propriedades na configuração do data-source
+
+		<property name="maxPoolSize" value="10"/>
+					Define o número máximo de conexões a ser armazenado no pool.
+
+		<property name="acquireIncrement" value="1"/>
+					A cada requisição por uma conexão, define quantas novas conexões devem ser incluídas no pool caso este não possua mais conexões disponíveis até atingir o número máximo definido em maxPoolSize .
+
+		<property name="maxIdleTime" value="120"/>
+					Define o tempo máximo em segundos que uma conexão não usada deve ser armazenada no pool.
+
+		<property name="acquireRetryAttempts" value="10"/>
+					Define o número de retentativas na obtenção de uma nova conexão por parte do pool.
+
+		<property name="initialPoolSize" value="10"/>
+					Define o número inicial de conexões que devem existir quando a primeira conexão for solicitada por alguma classe cliente.
+
+
+		
 
 
 
