@@ -7,7 +7,8 @@
 	<persistence-unit name="springStudy" transaction-type="RESOURCE_LOCAL">
 		<!-- provedor/implementacao do JPA -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<!-- entidade mapeada -->
-		<class>br.com.moviemanager.model.Movie</class>
+		
+		<class>br.com.spring.study.formas.geometricas.model.Results</class>
+		
 	</persistence-unit>
 </persistence>

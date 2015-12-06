@@ -91,7 +91,7 @@ Anotações de estudo do livro Vire o Jogo com Spring Framework.
 
 		Desta meneira, é importante que utilizamos um pool de conexão, para isto fazemos uso do C3PO, porém existem outras opção, como por exemplo o DBCP que é usado pelo tomcat.
 
-		Explicando as propriedades na configuração do data-source
+		Explicando as propriedades do poll na configuração do data-source
 
 		<property name="maxPoolSize" value="10"/>
 					Define o número máximo de conexões a ser armazenado no pool.
